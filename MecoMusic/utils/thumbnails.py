@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 from unidecode import unidecode
 from youtubesearchpython.future import Video
 
-from MecoMusic import app
+from MecoMusic import YouTube, app
 from config import YOUTUBE_IMG_URL
 
 
@@ -41,53 +41,70 @@ def clear(text):
 
 
 async def get_thumb(videoid,user_id):
-    if os.path.isfile(f"cache/{videoid}_{user_id}.png"):
-        return f"cache/{videoid}_{user_id}.png"
+    final_path = f"cache/{videoid}_{user_id}.png"
+    raw_thumb_path = f"cache/thumb{videoid}.png"
+    thumbnail = YOUTUBE_IMG_URL
+
+    if os.path.isfile(final_path):
+        return final_path
 
     try:
-        result = await Video.get(videoid)
-        if not result or not result.get("title"):
-            return YOUTUBE_IMG_URL
         try:
-            title = result["title"]
-            title = re.sub(r"\W+", " ", title)
-            title = title.title()
+            result = await Video.get(videoid)
         except:
-            title = "Unsupported Title"
-        try:
-            duration = (result.get("duration") or {}).get("text") or "Unknown Mins"
-        except:
-            duration = "Unknown Mins"
-        thumbnail = YOUTUBE_IMG_URL
-        for thumb in result.get("thumbnails") or []:
-            if isinstance(thumb, dict) and thumb.get("url"):
-                thumbnail = thumb["url"].split("?")[0]
-                break
-        try:
-            views = (result.get("viewCount") or {}).get("short") or "Unknown Views"
-        except:
+            result = None
+        if result and result.get("title"):
+            try:
+                title = result["title"]
+                title = re.sub(r"\W+", " ", title)
+                title = title.title()
+            except:
+                title = "Unsupported Title"
+            try:
+                duration = (result.get("duration") or {}).get("text") or "Unknown Mins"
+            except:
+                duration = "Unknown Mins"
+            for thumb in result.get("thumbnails") or []:
+                if isinstance(thumb, dict) and thumb.get("url"):
+                    thumbnail = thumb["url"].split("?")[0]
+                    break
+            try:
+                views = (result.get("viewCount") or {}).get("short") or "Unknown Views"
+            except:
+                views = "Unknown Views"
+            try:
+                channel = (result.get("channel") or {}).get("name") or "Unknown Channel"
+            except:
+                channel = "Unknown Channel"
+        else:
+            title, duration, _, thumbnail, _ = await YouTube.details(videoid, True)
+            title = re.sub(r"\W+", " ", title).title()
             views = "Unknown Views"
-        try:
-            channel = (result.get("channel") or {}).get("name") or "Unknown Channel"
-        except:
             channel = "Unknown Channel"
 
         async with aiohttp.ClientSession() as session:
             async with session.get(thumbnail) as resp:
                 if resp.status == 200:
-                    f = await aiofiles.open(f"cache/thumb{videoid}.png", mode="wb")
+                    f = await aiofiles.open(raw_thumb_path, mode="wb")
                     await f.write(await resp.read())
                     await f.close()
-        try:
-            async for photo in app.get_chat_photos(user_id,1):
-                sp=await app.download_media(photo.file_id, file_name=f'{user_id}.jpg')
-        except:
-            async for photo in app.get_chat_photos(app.id,1):
-                sp=await app.download_media(photo.file_id, file_name=f'{app.id}.jpg')
+                else:
+                    return thumbnail
 
-        xp=Image.open(sp)
+        sp = None
+        for target_id in (user_id, app.id):
+            try:
+                async for photo in app.get_chat_photos(target_id, limit=1):
+                    sp = await app.download_media(
+                        photo.file_id, file_name=f"cache/{target_id}.jpg"
+                    )
+                    break
+            except:
+                continue
+            if sp:
+                break
 
-        youtube = Image.open(f"cache/thumb{videoid}.png")
+        youtube = Image.open(raw_thumb_path).convert("RGBA")
         image1 = changeImageSize(1280, 720, youtube)
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(10))
@@ -95,8 +112,10 @@ async def get_thumb(videoid,user_id):
         background = enhancer.enhance(0.5)
         y=changeImageSize(200,200,circle(youtube)) 
         background.paste(y,(45,225),mask=y)
-        a=changeImageSize(200,200,circle(xp)) 
-        background.paste(a,(1045,225),mask=a)
+        if sp and os.path.isfile(sp):
+            xp = Image.open(sp).convert("RGBA")
+            a=changeImageSize(200,200,circle(xp)) 
+            background.paste(a,(1045,225),mask=a)
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("MecoMusic/assets/font2.ttf", 30)
         font = ImageFont.truetype("MecoMusic/assets/font.ttf", 30)
@@ -138,10 +157,12 @@ async def get_thumb(videoid,user_id):
                 font=arial,
             )
         try:
-            os.remove(f"cache/thumb{videoid}.png")
+            os.remove(raw_thumb_path)
         except:
             pass
-        background.save(f"cache/{videoid}_{user_id}.png")
-        return f"cache/{videoid}_{user_id}.png"
+        background.save(final_path)
+        return final_path
     except Exception:
-        return YOUTUBE_IMG_URL
+        if os.path.isfile(raw_thumb_path):
+            return raw_thumb_path
+        return thumbnail
