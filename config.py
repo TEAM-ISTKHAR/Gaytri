@@ -36,7 +36,7 @@ LOGGER_ID = int(getenv("LOGGER_ID", -1002715747653))
 
 # Get this value from @FallenxBot on Telegram by /id
 OWNER_ID = int(getenv("OWNER_ID", 6221699441))
-OWNER_USERNAME = getenv("OWNER_USERNAME", "rockyxd3")
+OWNER_USERNAME = getenv("OWNER_USERNAME", "MrRockytg")
 
 SUDO_USERS = list(map(int, getenv("SUDO_USERS", str(OWNER_ID)).split()))
 
@@ -48,7 +48,7 @@ HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 
 UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
-    "https://github.com/rockyxd3/Chahatbot",
+    "https://github.com/rockyxd3/Meco-Music",
 )
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "main")
 GIT_TOKEN = getenv(
