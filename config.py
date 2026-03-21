@@ -102,15 +102,15 @@ autoclean = []
 confirmer = {}
 
 
-START_IMG_URL = ["https://files.catbox.moe/hkh8gr.jpg",
-                 "https://files.catbox.moe/hkh8gr.jpg",
-                 "https://files.catbox.moe/hkh8gr.jpg",]
+START_IMG_URL = ["https://files.catbox.moe/m6reh8.jpg",
+                 "https://files.catbox.moe/m6reh8.jpg",
+                 "https://files.catbox.moe/m6reh8.jpg",]
     
 PING_IMG_URL = getenv(
-    "PING_IMG_URL", "https://files.catbox.moe/hkh8gr.jpg"
+    "PING_IMG_URL", "https://files.catbox.moe/a29r15.jpg"
 )
-PLAYLIST_IMG_URL = "https://files.catbox.moe/uxcm48.jpg"
-STATS_IMG_URL = "https://files.catbox.moe/pguloz.jpg"
+PLAYLIST_IMG_URL = "https://files.catbox.moe/sg5a4c.jpg"
+STATS_IMG_URL = "https://files.catbox.moe/sg5a4c.jpg"
 TELEGRAM_AUDIO_URL = "https://files.catbox.moe/hkh8gr.jpg"
 TELEGRAM_VIDEO_URL = "https://files.catbox.moe/hkh8gr.jpg"
 STREAM_IMG_URL = "https://files.catbox.moe/hkh8gr.jpg"
