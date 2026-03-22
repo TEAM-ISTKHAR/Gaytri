@@ -60,7 +60,6 @@ def stream_markup_timer(_, chat_id, played, dur):
                 text=f"{played} {bar} {dur}",
                 callback_data="GetTimer",
                 style=ButtonStyle.PRIMARY,
-                icon_custom_emoji_id=5280569974404966639
             )
         ],
         [
