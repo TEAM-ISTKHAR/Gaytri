@@ -4,7 +4,7 @@ import re
 from pyrogram import filters
 from pyrogram.enums import ButtonStyle, ChatType
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-from youtubesearchpython.future import Video
+from ytSearch import VideosSearch
 
 import config
 from MecoMusic import app
