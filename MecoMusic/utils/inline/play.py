@@ -67,25 +67,14 @@ def stream_markup_timer(_, chat_id, played, dur):
            # InlineKeyboardButton(text="", callback_data=f"ADMIN Pause|{chat_id}", icon_custom_emoji_id=5409042015415448331),
            # InlineKeyboardButton(text="", callback_data=f"ADMIN Stop|{chat_id}", icon_custom_emoji_id=5408832111773757273),
         ],
-        [
-            InlineKeyboardButton(
-                text="α∂∂ мє",
-                url="https://t.me/ChaahatMusicBot?startgroup=true",
-                icon_custom_emoji_id=5395476176527447827,
-                style=ButtonStyle.SUCCESS
-                
-            ),
-            InlineKeyboardButton(
-                text="ѕυρροʀᴛ",
-                url="https://t.me/Mecobots",
-                icon_custom_emoji_id=5438600169325095982,
-                style=ButtonStyle.DANGER
-            
-            )
+                        [
+         InlineKeyboardButton(text=_["S_B_3"], url=f"https://t.me/{app.username}?startgroup=true",)
         ],
-            
-
-       # [InlineKeyboardButton(text=" ᴄʟᴏsᴇ ▣", callback_data="close", style=ButtonStyle.DANGER, icon_custom_emoji_id=5408832111773757273)],
+        [
+         InlineKeyboardButton(text="• ᴏᴡɴᴇʀ •", url="https://t.me/ITZZ_ISTKHAR"),
+         InlineKeyboardButton(text="• ɢʀᴏᴜᴘ •", url="https://t.me/KAVYABOTS"),
+        ],
+        [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
     ]
     return buttons
 
@@ -97,25 +86,14 @@ def stream_markup(_, chat_id):
            # InlineKeyboardButton(text="", callback_data=f"ADMIN Pause|{chat_id}", icon_custom_emoji_id=5409042015415448331),
            # InlineKeyboardButton(text="", callback_data=f"ADMIN Stop|{chat_id}", icon_custom_emoji_id=5408832111773757273),
         ],
-        [
-            InlineKeyboardButton(
-                text="α∂∂ мє",
-                url="https://t.me/ChaahatMusicBot?startgroup=true",
-                icon_custom_emoji_id=5395476176527447827,
-                style=ButtonStyle.DANGER
-                
-            ),
-            InlineKeyboardButton(
-                text="ѕυρροʀᴛ",
-                url="https://t.me/Mecobots",
-                icon_custom_emoji_id=5438600169325095982,
-                style=ButtonStyle.DANGER
-            
-            )
+                        [
+         InlineKeyboardButton(text=_["S_B_3"], url=f"https://t.me/{app.username}?startgroup=true",)
         ],
-            
-
-       # [InlineKeyboardButton(text=" ᴄʟᴏsᴇ ▣", callback_data="close", style=ButtonStyle.DANGER, icon_custom_emoji_id=5408832111773757273)],
+        [
+         InlineKeyboardButton(text="• ᴏᴡɴᴇʀ •", url="https://t.me/Itzz_Istkhar"),
+         InlineKeyboardButton(text="• ɢʀᴏᴜᴘ •", url="https://t.me/KavyaBots"),
+        ],
+        [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
     ]
     return buttons
 
