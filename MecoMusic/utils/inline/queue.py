@@ -74,27 +74,13 @@ def queue_back_markup(_, CPLAY):
 def aq_markup(_, chat_id):
     buttons = [
         [
-           # InlineKeyboardButton(text="▷", callback_data=f"ADMIN Resume|{chat_id}"),
-           # InlineKeyboardButton(text="II", callback_data=f"ADMIN Pause|{chat_id}"),
-           # InlineKeyboardButton(text="‣‣I", callback_data=f"ADMIN Skip|{chat_id}"),
-           # InlineKeyboardButton(text="▢", callback_data=f"ADMIN Stop|{chat_id}"),
+            InlineKeyboardButton(text="▷", callback_data=f"ADMIN Resume|{chat_id}"),
+            InlineKeyboardButton(text="II", callback_data=f"ADMIN Pause|{chat_id}"),
+            InlineKeyboardButton(text="‣‣I", callback_data=f"ADMIN Skip|{chat_id}"),
+            InlineKeyboardButton(text="▢", callback_data=f"ADMIN Stop|{chat_id}"),
         ],
-        [
-            InlineKeyboardButton(
-                text="α∂∂ мє",
-                url="https://t.me/ChaahatMusicBot?startgroup=true",
-                icon_custom_emoji_id=5395476176527447827,
-                style=ButtonStyle.SUCCESS
-                
-            ),
-            InlineKeyboardButton(
-                text=_["CLOSE_BUTTON"],
-                callback_data="close",
-                icon_custom_emoji_id=5039614900280754969,
-                style=ButtonStyle.DANGER
-            
-            ),
-        ]
+        
+        
     ]
     
     return buttons
