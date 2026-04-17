@@ -36,8 +36,8 @@ VIDEO_DURATION_LIMIT = int(getenv("VIDEO_DURATION_LIMIT", 14400)) # 5 hours
 LOGGER_ID = int(getenv("LOGGER_ID", -1002715747653))
 
 # Get this value from @FallenxBot on Telegram by /id
-OWNER_ID = int(getenv("OWNER_ID", 6221699441))
-OWNER_USERNAME = getenv("OWNER_USERNAME", "MrRockytg")
+OWNER_ID = int(getenv("OWNER_ID", 6006232114))
+OWNER_USERNAME = getenv("OWNER_USERNAME", "ITZZ_ISTKHAR")
 
 SUDO_USERS = list(map(int, getenv("SUDO_USERS", str(OWNER_ID)).split()))
 
